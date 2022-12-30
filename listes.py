@@ -83,7 +83,7 @@ listeColones = ['code',
 #'collagen-meat-protein-ratio_100g','cocoa_100g','chlorophyl_100g','carbon-footprint_100g',
 'nutrition-score-fr_100g']
 
-listeColonesClient = ['code', 'product_name', 'image_url','categories_tags', 'pnns_groups_1', 'pnns_groups_2']
+listeColonesClient = ['code', 'product_name', 'image_url','categories']
 
 
 listeColonesScore = ['code',
@@ -154,7 +154,7 @@ listeColonesAlgo = ['product_name',
 'nutrition-score-fr_100g']
 
 
-listeColones = listeColonesClient
+listeColones = list(listeColonesClient)
 listeColones += [e for e in listeColonesScore if e not in listeColones]
 listeColones += [e for e in listeColonesAlgo if e not in listeColones]
 
