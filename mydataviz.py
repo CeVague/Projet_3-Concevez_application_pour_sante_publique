@@ -5,6 +5,11 @@ from wordcloud import WordCloud
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+STOPWORDS = {"g", "mg", "à", "la", "le", "les", "au", "the", "a", 
+             "et", "and", "l", "kg", "de", "des", "aux", "of", "in", 
+             "trace", "traces", "contain", "contains", "less", 
+             "more", "en", "nan"}
+
 class DataSet:
     def __init__(self, data, categorie):
         self.data = data
@@ -53,7 +58,7 @@ class DataSetTxt(DataSet):
         self.categorie = 'txt'
         self.norm = None
   
-    def normalise(self):
+    def normalise(self, remove_stop=False):
         if self.norm is None:
             # convert to lower case
             norm = self.data.lower()
@@ -65,9 +70,9 @@ class DataSetTxt(DataSet):
             # remove white spaces
             norm = norm.strip()
             norm = re.sub(r'\ +',' ',norm)
-            #Stopword
-            norm = re.sub(r' (g|mg|à|la|le|les|au|the|a|et|and|l|kg|de|des|aux) ','',norm)
-            norm = re.sub(r' (of|in|trace|traces|contain|contains|less|more|en) ','',norm)
+            if remove_stop:
+                norm = re.sub(r' (g|mg|à|la|le|les|au|the|a|et|and|l|kg|de|des|aux) ','',norm)
+                norm = re.sub(r' (of|in|trace|traces|contain|contains|less|more|en) ','',norm)
             self.norm = norm
         return self
     
